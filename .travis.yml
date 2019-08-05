@@ -1,0 +1,91 @@
+dist: xenial
+
+language: python
+
+python:
+- '3.6'
+- '3.7'
+
+stages:
+  - lint
+  - test
+  - deploy
+
+env:
+  matrix:
+  - DJANGO_VERSION=2.1 REST_VERSION=3.10
+  - DJANGO_VERSION=2.2 REST_VERSION=3.10
+  - DJANGO_VERSION=dev REST_VERSION=3.10
+  - DJANGO_VERSION=2.1 REST_VERSION=dev
+  - DJANGO_VERSION=2.2 REST_VERSION=dev
+  - DJANGO_VERSION=dev REST_VERSION=dev
+
+matrix:
+  exclude:
+  - python: 3.6
+    env: DJANGO_VERSION=2.1 REST_VERSION=3.10
+  - python: 3.6
+    env: DJANGO_VERSION=2.2 REST_VERSION=3.10
+  - python: 3.6
+    env: DJANGO_VERSION=dev REST_VERSION=3.10
+  - python: 3.7
+    env: DJANGO_VERSION=2.1 REST_VERSION=3.10
+  - python: 3.7
+    env: DJANGO_VERSION=2.2 REST_VERSION=3.10
+  - python: 3.7
+    env: DJANGO_VERSION=dev REST_VERSION=3.10
+  - python: 3.6
+    env: DJANGO_VERSION=2.1 REST_VERSION=dev
+  - python: 3.6
+    env: DJANGO_VERSION=2.2 REST_VERSION=dev
+  - python: 3.6
+    env: DJANGO_VERSION=dev REST_VERSION=dev
+  - python: 3.7
+    env: DJANGO_VERSION=2.1 REST_VERSION=dev
+  - python: 3.7
+    env: DJANGO_VERSION=2.2 REST_VERSION=dev
+  - python: 3.7
+    env: DJANGO_VERSION=dev REST_VERSION=dev
+
+install:
+- pip install -r dev-requirements.txt
+- python setup.py install
+- if [[ $DJANGO_VERSION == dev ]]; then
+  pip install -e git+https://github.com/django/django@master#egg=django;
+  else
+  pip install -q Django==$DJANGO_VERSION;
+  fi
+- if [[ $REST_VERSION == dev ]]; then
+  pip install -e git+https://github.com/encode/django-rest-framework.git@master#egg=django-rest-framework;
+  else
+  pip install -q djangorestframework==$REST_VERSION;
+  fi
+
+script:
+- coverage run runtests.py
+- codecov
+
+jobs:
+  include:
+    - stage: lint
+      env:
+        - DJANGO_VERSION=none
+      install:
+        - pip3 install flake8
+      script:
+        - flake8 template_engines
+
+    - stage: deploy
+      env:
+        - DJANGO_VERSION=none
+      install: skip
+      before_script: skip
+      script: skip
+      deploy:
+        stage: deploy
+        provider: pypi
+        user: "$PYPI_USER"
+        password:
+          secure: bAce8SPDSv+iVtOFVPXU6sbOF9L9a8YVL9RwuIiLFGqXurpRjiY6m1YmR0dQaN8mh5l42ZxlkGZaCEKazziRDc2KRTmKD5U7UKIPgoMSOxHTccMq8P5VC7MRNOCYXfO/qgfSlddbK7ztlrQQym8gjg5Qq4XM2f/HNRzx5eOeBIEGH7TiMzABp7BGDeJsHCaIswJ1NQyWsUxPWk43YPv7MDF7BdIozx/AL+Bua/UhgwVWS7HmDjfH8NtbSLWuInFsBZ7n4qdbDic4hJH4qZaf1MWcOOcWAZrRtRuL0sPcOZK9dv6JjvgIzxbM8ANzzd/eA0OBc+K5PUQb1jps6K+lPsODt6yyLR5yujdG039Cfozd2q8HJ44ItkUZNPQc/ORoDx4/WsiRaMLlIdDduybzK2WAlBsxIiXxi133luxdYYI6UVQkPFqjPSjKTjYyQ800wmIAATRLuxd0b4zaiq09v8mS/CozA7bXYnLQRt+ue5SuJvGXyxQV3JOvW5AWdEB3ccb6XWMMtEVRStogxCtJ9JJgh/60nr/u8KxsXQSM31Xvb/7dzS5VFxGddfMioWyEAkWX18L3cHVwhl91wKuGk8tNeDojO3jBHRj1A1gA5enBc2e/RUdDbC22UJsg7LtYCT93bIadq+/7DYqRpXJq0DM1BkSmgjAB2sFcUsMbAz8=
+        on:
+          tags: true
