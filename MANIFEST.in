@@ -1,0 +1,4 @@
+include *.md
+recursive-include template_model *.md
+recursive-include template_model *.py
+recursive-exclude test_template_model *
