@@ -2,6 +2,9 @@
 source=template_engines
 
 [report]
+omit =
+    */apps.py
+    */migrations/*
 exclude_lines =
     pragma: no cover
     raise NotImplementedError
