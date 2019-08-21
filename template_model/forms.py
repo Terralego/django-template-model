@@ -9,7 +9,7 @@ class TemplateForm(ModelForm):
 
     class Meta:
         model = Template
-        fields = ['name', 'format', 'content', 'content_type', 'object_id']
+        fields = ['name', 'format', 'content']
 
     def clean_content(self):
         b_content = self.cleaned_data['content'].file.read()
