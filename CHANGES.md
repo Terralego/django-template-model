@@ -5,3 +5,13 @@
 * `Template` model
 * Admin site
 * View set with an additional route to download a template
+
+## 0.1.0
+
+From now on, `Template` model contains:
+
+* a name,
+* a format,
+* a content,
+* the date of its creation,
+* the date of its last update.
