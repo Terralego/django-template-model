@@ -15,3 +15,7 @@ From now on, `Template` model contains:
 * a content,
 * the date of its creation,
 * the date of its last update.
+
+## 0.1.1
+
+This package is compatible with `Django>=2.1.0,<3.0.0` et `djangorestframework>=3.8.0,<3.11.0`.
