@@ -13,8 +13,8 @@ class TemplateViewSet(ModelViewSet):
 
     @action(detail=True, methods=['get'], url_path='content')
     def content(self, request, *args, **kwargs):
-        obj = self.get_object()
+        template = self.get_object()
         return HttpResponse(
-            content=from_str_to_bytes(obj.content, obj.format),
-            content_type=getattr(FmtMimeMapping, obj.format).value
+            content=from_str_to_bytes(template.content, template.format),
+            content_type=getattr(FmtMimeMapping, template.format).value
         )
