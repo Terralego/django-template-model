@@ -11,5 +11,5 @@ if __name__ == '__main__':
     setup()
     TestRunner = get_runner(settings)
     test_runner = TestRunner()
-    failures = test_runner.run_tests(['test_template_model.tests'])
+    failures = test_runner.run_tests(['template_model.tests'])
     sys_exit(bool(failures))
