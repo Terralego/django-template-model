@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from template_model.utils import from_bytes_to_str, from_str_to_bytes
+from ..utils import from_bytes_to_str, from_str_to_bytes
 
 
 class TestUtils(TestCase):
