@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/courtem/django-template-model/branch/master/graph/badge.svg)](https://codecov.io/gh/courtem/django-template-model)
 ![Python Version](https://img.shields.io/badge/python-%3E%3D%203.6-blue.svg)
 ![Django Version](https://img.shields.io/badge/django-%3E%3D%202.1-blue.svg)
-![Rest Version](https://img.shields.io/badge/django--rest--framework-%3E%3D%203.10.0-blue)
+![Rest Version](https://img.shields.io/badge/django--rest--framework-%3E%3D%203.8.0-blue)
 
 # django-template-model
 
