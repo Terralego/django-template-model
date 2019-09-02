@@ -1,5 +1,4 @@
 import json
-import os
 
 from django.test import TestCase
 from django.urls import reverse
@@ -9,9 +8,9 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from ..utils import from_bytes_to_str
 from ..models import Template
 
-UserModel = get_user_model()
+from .settings import ODT_TEMPLATE_PATH, DOCX_TEMPLATE_PATH
 
-HERE = os.path.abspath(os.path.dirname(__file__))
+UserModel = get_user_model()
 
 
 class TestOdtTemplateViewSetContent(TestCase):
@@ -23,7 +22,7 @@ class TestOdtTemplateViewSetContent(TestCase):
     def test_content_works(self):
         f = SimpleUploadedFile(
             'template.odt',
-            open(os.path.join(HERE, 'template.odt'), 'rb').read(),
+            open(ODT_TEMPLATE_PATH, 'rb').read(),
             content_type='application/vnd.oasis.opendocument.text',
         )
         post_response = self.client.post(
@@ -45,7 +44,7 @@ class TestOdtTemplateViewSetContent(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.content,
-            open(os.path.join(HERE, 'template.odt'), 'rb').read()
+            open(ODT_TEMPLATE_PATH, 'rb').read()
         )
 
 
@@ -58,7 +57,7 @@ class TestDocxTemplateViewSetContent(TestCase):
             name='Template',
             format='docx',
             content=from_bytes_to_str(
-                open(os.path.join(HERE, 'template.docx'), 'rb').read(),
+                open(DOCX_TEMPLATE_PATH, 'rb').read(),
                 'docx'
             ),
         )
@@ -68,5 +67,5 @@ class TestDocxTemplateViewSetContent(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.content,
-            open(os.path.join(HERE, 'template.docx'), 'rb').read()
+            open(DOCX_TEMPLATE_PATH, 'rb').read()
         )

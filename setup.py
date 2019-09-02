@@ -20,7 +20,7 @@ setup(
     description_content_type="text/markdown",
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    url='https://github.com/courtem/django-template-model',
+    url='https://github.com/Terralego/django-template-model',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
@@ -34,5 +34,15 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
-    install_requires=['Django>=2.1.0,<3.0.0', 'djangorestframework>=3.8.0,<3.11.0'],
+    install_requires=[
+        'Django>=2.1.0,<3.0.0',
+        'djangorestframework>=3.8.0,<3.11.0',
+    ],
+    extras_require={
+        'dev': [
+            'flake8',
+            'coverage',
+            'codecov',
+        ]
+    },
 )
