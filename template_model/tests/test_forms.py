@@ -17,12 +17,12 @@ class TestForms(TestCase):
         form_data = {
             'name': 'Template',
         }
-        form = TemplateForm(data=form_data, files={'file': f})
+        form = TemplateForm(data=form_data, files={'template_file': f})
         self.assertTrue(form.is_valid(), form.errors)
         self.assertTrue('content' not in form.cleaned_data)
         self.assertEqual(form.cleaned_data['name'], 'Template')
         self.assertEqual(
-            form.cleaned_data['file'].read(),
+            form.cleaned_data['template_file'].read(),
             b_content,
         )
 
@@ -36,7 +36,7 @@ class TestForms(TestCase):
         self.assertTrue('content' not in form.cleaned_data)
         self.assertEqual(form.cleaned_data['name'], 'Template')
         self.assertEqual(
-            form.cleaned_data['file'].read(),
+            form.cleaned_data['template_file'].read(),
             'Hello world!',
         )
 
@@ -49,7 +49,7 @@ class TestForms(TestCase):
         )
         form = TemplateForm(
             data={'name': 'Template', 'content': 'Hello world!'},
-            files={'file': f}
+            files={'template_file': f}
         )
         self.assertFalse(form.is_valid())
 

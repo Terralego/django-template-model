@@ -14,12 +14,12 @@ class TestSerializers(TestCase):
             b_content,
             content_type='application/vnd.oasis.opendocument.text',
         )
-        serializer = TemplateSerializer(data={'name': 'Template', 'file': f})
+        serializer = TemplateSerializer(data={'name': 'Template', 'template_file': f})
         self.assertTrue(serializer.is_valid(), serializer.errors)
         self.assertTrue('content' not in serializer.validated_data)
         self.assertEqual(serializer.validated_data['name'], 'Template')
         self.assertEqual(
-            serializer.validated_data['file'].read(),
+            serializer.validated_data['template_file'].read(),
             b_content,
         )
 
@@ -33,7 +33,7 @@ class TestSerializers(TestCase):
         self.assertTrue('content' not in serializer.validated_data)
         self.assertEqual(serializer.validated_data['name'], 'Template')
         self.assertEqual(
-            serializer.validated_data['file'].read(),
+            serializer.validated_data['template_file'].read(),
             'Hello world!',
         )
 
@@ -45,7 +45,7 @@ class TestSerializers(TestCase):
             content_type='application/vnd.oasis.opendocument.text',
         )
         serializer = TemplateSerializer(
-            data={'name': 'Template', 'file': f, 'content': 'Hello world!'})
+            data={'name': 'Template', 'template_file': f, 'content': 'Hello world!'})
         self.assertFalse(serializer.is_valid())
 
     def test_template_serializer_with_no_content_and_no_file(self):

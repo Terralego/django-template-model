@@ -13,4 +13,4 @@ class TemplateViewSet(ModelViewSet):
     @action(detail=True, methods=['get'], url_path='content')
     def content(self, request, *args, **kwargs):
         template = self.get_object()
-        return FileResponse(open(template.file.path, 'rb'), as_attachment=True)
+        return FileResponse(open(template.template_file.path, 'rb'), as_attachment=True)

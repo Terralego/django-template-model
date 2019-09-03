@@ -18,7 +18,7 @@ def content_to_file(apps, schema_editor):
             mime_type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         else:
             b_content = content.encode('utf-8')
-        template.file = ContentFile(b_content, name=slugify(template.name))
+        template.template_file = ContentFile(b_content, name=slugify(template.name))
         template.mime_type = mime_type
         template.save()
 
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             'Template',
-            'file',
+            'template_file',
             models.FileField(null=True),
         ),
         migrations.AddField(
@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             'Template',
-            'file',
+            'template_file',
             models.FileField(),
         ),
         migrations.AlterField(

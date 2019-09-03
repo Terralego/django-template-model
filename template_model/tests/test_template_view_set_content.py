@@ -13,7 +13,7 @@ UserModel = get_user_model()
 
 
 def remove_template_file(template_info):
-    f = Template.objects.get(pk=template_info['pk']).file
+    f = Template.objects.get(pk=template_info['pk']).template_file
     os.remove(f.path)
 
 
@@ -33,7 +33,7 @@ class TestTemplateViewSetContent(APITestCase):
             reverse('template-list'),
             data={
                 'name': 'Template',
-                'file': up_file,
+                'template_file': up_file,
             },
         )
         template_info = json.loads(
@@ -62,7 +62,7 @@ class TestTemplateViewSetContent(APITestCase):
             reverse('template-list'),
             data={
                 'name': 'Template',
-                'file': f,
+                'template_file': f,
             }
         )
         template_info = json.loads(
