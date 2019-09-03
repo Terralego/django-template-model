@@ -24,52 +24,9 @@ env:
   - DJANGO_VERSION=2.2 REST_VERSION=dev
   - DJANGO_VERSION=dev REST_VERSION=dev
 
-matrix:
-  exclude:
-  - python: 3.6
-    env: DJANGO_VERSION=2.1 REST_VERSION=3.8
-  - python: 3.6
-    env: DJANGO_VERSION=2.2 REST_VERSION=3.8
-  - python: 3.7
-    env: DJANGO_VERSION=2.1 REST_VERSION=3.8
-  - python: 3.7
-    env: DJANGO_VERSION=2.2 REST_VERSION=3.8
-  - python: 3.6
-    env: DJANGO_VERSION=2.1 REST_VERSION=3.9
-  - python: 3.6
-    env: DJANGO_VERSION=2.2 REST_VERSION=3.9
-  - python: 3.7
-    env: DJANGO_VERSION=2.1 REST_VERSION=3.9
-  - python: 3.7
-    env: DJANGO_VERSION=2.2 REST_VERSION=3.9
-  - python: 3.6
-    env: DJANGO_VERSION=2.1 REST_VERSION=3.10
-  - python: 3.6
-    env: DJANGO_VERSION=2.2 REST_VERSION=3.10
-  - python: 3.6
-    env: DJANGO_VERSION=dev REST_VERSION=3.10
-  - python: 3.7
-    env: DJANGO_VERSION=2.1 REST_VERSION=3.10
-  - python: 3.7
-    env: DJANGO_VERSION=2.2 REST_VERSION=3.10
-  - python: 3.7
-    env: DJANGO_VERSION=dev REST_VERSION=3.10
-  - python: 3.6
-    env: DJANGO_VERSION=2.1 REST_VERSION=dev
-  - python: 3.6
-    env: DJANGO_VERSION=2.2 REST_VERSION=dev
-  - python: 3.6
-    env: DJANGO_VERSION=dev REST_VERSION=dev
-  - python: 3.7
-    env: DJANGO_VERSION=2.1 REST_VERSION=dev
-  - python: 3.7
-    env: DJANGO_VERSION=2.2 REST_VERSION=dev
-  - python: 3.7
-    env: DJANGO_VERSION=dev REST_VERSION=dev
-
 install:
-- pip install -r dev-requirements.txt
 - python setup.py install
+- pip install coverage codecov
 - if [[ $DJANGO_VERSION == dev ]]; then
   pip install -e git+https://github.com/django/django@master#egg=django;
   else
@@ -82,7 +39,7 @@ install:
   fi
 
 script:
-- coverage run --source=template_model runtests.py
+- coverage run --source=template_model ./manage.py test
 - codecov
 
 jobs:

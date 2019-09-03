@@ -1,18 +1,16 @@
-import os
-
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from ..forms import TemplateForm
 from ..utils import from_bytes_to_str
 
-HERE = os.path.abspath(os.path.dirname(__file__))
+from .settings import ODT_TEMPLATE_PATH
 
 
 class TestForms(TestCase):
 
     def test_template_form_works(self):
-        b_content = open(os.path.join(HERE, 'template.odt'), 'rb').read()
+        b_content = open(ODT_TEMPLATE_PATH, 'rb').read()
         f = SimpleUploadedFile(
             'template.odt',
             b_content,
