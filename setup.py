@@ -35,8 +35,9 @@ setup(
         'Programming Language :: Python :: 3.7',
     ],
     install_requires=[
-        'Django>=2.1.0,<3.0.0',
-        'djangorestframework>=3.8.0,<3.11.0',
+        'Django>=2.1.0',
+        'djangorestframework>=3.8.0',
+        'python-magic>=0.4.0',
     ],
     extras_require={
         'dev': [
