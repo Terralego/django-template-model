@@ -1,21 +1,28 @@
-from rest_framework.serializers import FileField, ModelSerializer
+from django.core.files.base import ContentFile
+from django.utils.text import slugify
+from rest_framework import serializers
 
 from .models import Template
-from .utils import FmtMimeMapping, from_bytes_to_str
 
 
-class TemplateSerializer(ModelSerializer):
-    content = FileField(write_only=True)
+class TemplateSerializer(serializers.ModelSerializer):
+    content = serializers.CharField(required=False, write_only=True)
+    file = serializers.FileField(required=False, write_only=True)
 
     class Meta:
         model = Template
-        fields = '__all__'
+        fields = ('pk', 'name', 'mime_type', 'file', 'content', 'added', 'updated')
         extra_kwargs = {
+            'mime_type': {'read_only': True},
             'added': {'read_only': True},
             'updated': {'read_only': True},
         }
 
-    def validate_content(self, data):
-        fmt = FmtMimeMapping(data.content_type).name
-        b_content = data.file.read()
-        return from_bytes_to_str(b_content, fmt)
+    def validate(self, attrs):
+        if 'content' in attrs and 'file' in attrs:
+            raise serializers.ValidationError('You can not specify a text and upload a file.')
+        elif 'content' not in attrs and 'file' not in attrs:
+            raise serializers.ValidationError('Please specify a text or upload a file.')
+        elif 'content' in attrs:
+            attrs['file'] = ContentFile(attrs.pop('content'), name=slugify(attrs['name']))
+        return attrs

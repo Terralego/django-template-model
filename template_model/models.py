@@ -1,20 +1,18 @@
 from django.db import models
-
-
-FORMAT_CHOICES = (
-    ('odt', 'odt'),
-    ('html', 'html'),
-    ('docx', 'docx'),
-)
+from magic import from_buffer
 
 
 class Template(models.Model):
     name = models.CharField(max_length=256, unique=True)
-    format = models.CharField(max_length=256, choices=FORMAT_CHOICES)
-    content = models.TextField()
+    mime_type = models.CharField(max_length=256)
+    file = models.FileField()
 
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} ({self.format})"
+        return f"{self.name} ({self.mime_type})"
+
+    def save(self, *args, **kwargs):
+        self.mime_type = from_buffer(self.file.read(), mime=True)
+        super().save(*args, **kwargs)
