@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/courtem/django-template-model.svg?branch=master)](https://travis-ci.org/courtem/django-template-model)
+[![Build Status](https://travis-ci.org/Terralego/django-template-model.svg?branch=master)](https://travis-ci.org/Terralego/django-template-model)
 [![PyPI version](https://badge.fury.io/py/django-template-model.svg)](https://badge.fury.io/py/django-template-model)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2e15c7ac17e66d1c8e16/maintainability)](https://codeclimate.com/github/courtem/django-template-model/maintainability)
 [![codecov](https://codecov.io/gh/courtem/django-template-model/branch/master/graph/badge.svg)](https://codecov.io/gh/courtem/django-template-model)
