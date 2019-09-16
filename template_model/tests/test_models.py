@@ -16,4 +16,4 @@ class TemplateModelTestCase(TestCase):
 
     def test_template_str(self):
         self.assertEqual(str(self.template),
-                         'template (application/vnd.oasis.opendocument.text)')
+                         self.template.name)
