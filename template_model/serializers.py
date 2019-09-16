@@ -11,9 +11,8 @@ class TemplateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Template
-        fields = ('pk', 'name', 'mime_type', 'template_file', 'content', 'added', 'updated')
+        fields = ('pk', 'name', 'template_file', 'content', 'added', 'updated')
         extra_kwargs = {
-            'mime_type': {'read_only': True},
             'added': {'read_only': True},
             'updated': {'read_only': True},
         }
