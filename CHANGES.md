@@ -1,5 +1,12 @@
 # Versions
 
+# 1.0.1      (2019-09-24)
+
+Update:
+
+* mimetype and magic are no longer used
+
+
 ## 1.0.0
 
 From now on, `Template` model contains:
