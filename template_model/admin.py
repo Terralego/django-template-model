@@ -6,7 +6,7 @@ from .forms import TemplateForm
 
 class TemplateAdmin(admin.ModelAdmin):
     form = TemplateForm
-    list_display = ('name', 'mime_type', 'added', 'updated')
+    list_display = ('name', 'added', 'updated')
 
 
 admin.site.register(Template, TemplateAdmin)

@@ -41,8 +41,6 @@ class TestTemplateViewSetContent(APITestCase):
         )
         self.assertEqual(post_response.status_code, 201)
         self.assertEqual(template_info['name'], 'Template')
-        self.assertEqual(template_info['mime_type'],
-                         'application/vnd.oasis.opendocument.text')
         response = self.client.get(
             reverse('template-content', kwargs={'pk': template_info['pk']}))
         self.assertEqual(response.status_code, 200)
@@ -70,10 +68,6 @@ class TestTemplateViewSetContent(APITestCase):
         )
         self.assertEqual(post_response.status_code, 201)
         self.assertEqual(template_info['name'], 'Template')
-        self.assertEqual(
-            template_info['mime_type'],
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        )
 
         response = self.client.get(
             reverse('template-content', kwargs={'pk': template_info['pk']}))
@@ -97,8 +91,6 @@ class TestTemplateViewSetContent(APITestCase):
         )
         self.assertEqual(post_response.status_code, 201)
         self.assertEqual(template_info['name'], 'Template')
-        self.assertEqual(template_info['mime_type'],
-                         'text/plain')
         response = self.client.get(
             reverse('template-content', kwargs={'pk': template_info['pk']}))
         self.assertEqual(response.status_code, 200)

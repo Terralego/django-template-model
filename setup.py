@@ -37,7 +37,6 @@ setup(
     install_requires=[
         'Django>=2.1.0',
         'djangorestframework>=3.8.0',
-        'python-magic>=0.4.0',
     ],
     extras_require={
         'dev': [

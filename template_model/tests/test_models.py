@@ -1,13 +1,14 @@
-import os
+from tempfile import gettempdir
 
 from django.core.files import File
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from template_model.models import Template
 
 from .settings import ODT_TEMPLATE_PATH
 
 
+@override_settings(MEDIA_ROOT=gettempdir())
 class TemplateModelTestCase(TestCase):
     def setUp(self):
         self.file = File(open(ODT_TEMPLATE_PATH, 'rb'))
@@ -15,12 +16,4 @@ class TemplateModelTestCase(TestCase):
 
     def test_template_str(self):
         self.assertEqual(str(self.template),
-                         'template (application/vnd.oasis.opendocument.text)')
-
-    def test_save(self):
-        self.assertEqual(
-            'application/vnd.oasis.opendocument.text',
-            self.template.mime_type)
-
-    def tearDown(self):
-        os.remove(self.template.template_file.path)
+                         self.template.name)
