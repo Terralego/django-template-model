@@ -1,5 +1,12 @@
 # Versions
 
+# 1.1.0     (XXXX-XX-XX)
+
+Changes:
+
+* added attribute becomes created_at
+* updated attribute becomes updated_at
+
 # 1.0.1      (2019-09-24)
 
 Update:

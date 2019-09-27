@@ -11,10 +11,10 @@ class TemplateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Template
-        fields = ('pk', 'name', 'template_file', 'content', 'added', 'updated')
+        fields = ('pk', 'name', 'template_file', 'content', 'created_at', 'updated_at')
         extra_kwargs = {
-            'added': {'read_only': True},
-            'updated': {'read_only': True},
+            'created_at': {'read_only': True},
+            'updated_at': {'read_only': True},
         }
 
     def validate(self, attrs):
