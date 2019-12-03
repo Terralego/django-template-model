@@ -33,10 +33,14 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Framework :: Django',
+        'Framework :: Django :: 2.2',
+        'Framework :: Django :: 3.0',
     ],
     install_requires=[
-        'Django>=2.1.0',
-        'djangorestframework>=3.8.0',
+        'Django>=2.2',
+        'djangorestframework',
     ],
     extras_require={
         'dev': [
