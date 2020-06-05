@@ -3,6 +3,9 @@
 1.0.3.dev0      (XXXX-XX-XX)
 ----------------------------
 
+* Delete views / urls and useless restframework dependencies
+* Now with loader config, Template are discoverable like any other template
+
 1.0.2           (2020-06-05)
 ----------------------------
 

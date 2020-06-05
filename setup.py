@@ -42,6 +42,7 @@ setup(
     install_requires=[
         'Django>=2.2',
     ],
+    test_requires=test_requires,
     extras_require={
         'dev': [
             'flake8',
