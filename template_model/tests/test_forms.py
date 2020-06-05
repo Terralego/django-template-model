@@ -1,18 +1,21 @@
+import os
+
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from ..forms import TemplateForm
-from .settings import ODT_TEMPLATE_PATH
 
 
 class TestForms(TestCase):
 
     def test_template_form_with_file(self):
-        b_content = open(ODT_TEMPLATE_PATH, 'rb').read()
+        with open(os.path.join(os.path.dirname(__file__), 'test.html'), 'rb') as template_file:
+            b_content = template_file.read()
+
         f = SimpleUploadedFile(
-            'template.odt',
+            "test.html",
             b_content,
-            content_type='application/vnd.oasis.opendocument.text',
+            content_type='text/plain',
         )
         form_data = {
             'name': 'Template',
@@ -41,11 +44,13 @@ class TestForms(TestCase):
         )
 
     def test_template_form_with_content_and_file(self):
-        b_content = open(ODT_TEMPLATE_PATH, 'rb').read()
+        with open(os.path.join(os.path.dirname(__file__), 'test.html'), 'rb') as template_file:
+            b_content = template_file.read()
+
         f = SimpleUploadedFile(
-            'template.odt',
+            "test.html",
             b_content,
-            content_type='application/vnd.oasis.opendocument.text',
+            content_type='text/plain',
         )
         form = TemplateForm(
             data={'name': 'Template', 'content': 'Hello world!'},
