@@ -26,8 +26,8 @@ class Loader(BaseLoader):
     def get_contents(self, origin):
         return self._load_template_source(origin.template_name)
 
-    def _load__template(self, template_name, cache_key, site, **params):
-        template = Template.objects.get(template_file=template_name, **params)
+    def _load__template(self, template_name):
+        template = Template.objects.get(template_file=template_name)
         with template.template_file.open('rb+') as my_template:
             return my_template.read()
 
