@@ -1,5 +1,4 @@
 from django import forms
-from django.utils.text import slugify
 from django.core.files.base import ContentFile
 
 from .models import Template
