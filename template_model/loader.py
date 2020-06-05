@@ -29,7 +29,10 @@ class Loader(BaseLoader):
     def _load__template(self, template_name):
         template = Template.objects.get(template_file=template_name)
         with template.template_file.open('rb+') as my_template:
-            return my_template.read().decode()
+            try:
+                return my_template.read().decode()
+            except UnicodeDecodeError:
+                return my_template.read()
 
     def _load_template_source(self, template_name, template_dirs=None):
         try:
