@@ -1,5 +1,4 @@
 from django import forms
-from django.utils.text import slugify
 from django.core.files.base import ContentFile
 
 from .models import Template
@@ -22,7 +21,7 @@ class TemplateForm(forms.ModelForm):
         elif cleaned_data['content']:
             cleaned_data['template_file'] = ContentFile(
                 cleaned_data.pop('content'),
-                name=slugify(cleaned_data['name']))
+                name=cleaned_data['name'])
         else:
             cleaned_data.pop('content')
         return cleaned_data

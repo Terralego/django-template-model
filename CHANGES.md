@@ -1,9 +1,10 @@
 # Versions
 
-1.0.2.dev0      (XXXX-XX-XX)
+1.0.2           (2020-06-05)
 ----------------------------
 
 * Add python 3.8 and django 3.0 support
+* Add loader to handle Django Template Engine support
 
 
 1.0.1           (2019-09-24)

@@ -1,4 +1,4 @@
-dist: xenial
+dist: bionic
 
 language: python
 
@@ -14,9 +14,9 @@ stages:
 
 env:
   matrix:
-  - DJANGO_VERSION=2.1
-  - DJANGO_VERSION=2.2
-  - DJANGO_VERSION=dev
+    - DJANGO_VERSION=2.2.*
+    - DJANGO_VERSION=3.0.*
+    - DJANGO_VERSION=dev
 
 install:
 - python setup.py install
@@ -42,7 +42,7 @@ jobs:
       install:
         - pip3 install flake8
       script:
-        - flake8 template_engines
+        - flake8 template_model
       after_success: skip
 
     - stage: deploy
