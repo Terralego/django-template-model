@@ -3,6 +3,8 @@
 1.0.4.dev0      (XXXX-XX-XX)
 ----------------------------
 
+* Handle text or binary based templates (Compatibility with django-template-engines)
+
 
 1.0.3           (2020-06-05)
 ----------------------------

@@ -30,6 +30,7 @@ class Loader(BaseLoader):
         template = Template.objects.get(template_file=template_name)
         with template.template_file.open('rb+') as my_template:
             try:
+                # for text based templates, decode it
                 return my_template.read().decode()
             except UnicodeDecodeError:
                 return my_template.read()
