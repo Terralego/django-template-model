@@ -1,6 +1,6 @@
 # Versions
 
-1.0.3.dev0      (XXXX-XX-XX)
+1.0.3           (2020-06-05)
 ----------------------------
 
 * Delete views / urls and useless restframework dependencies
