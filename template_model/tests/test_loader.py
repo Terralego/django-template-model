@@ -1,9 +1,12 @@
+from tempfile import TemporaryDirectory
+
 from django.template.loader import render_to_string
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from template_model.tests.factories import TemplateHTMLFactory
 
 
+@override_settings(MEDIA_ROOT=TemporaryDirectory().name)
 class LoaderTestCase(TestCase):
     def setUp(self) -> None:
         pass
