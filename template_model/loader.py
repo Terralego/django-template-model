@@ -27,7 +27,11 @@ class Loader(BaseLoader):
         try:
             template = Template.objects.get(template_file=origin.template_name)
             with template.template_file.open() as my_template:
-                return my_template.read()
+                try:
+                    return my_template.read().decode()
+                except UnicodeDecodeError:
+                    return my_template.read()
+
         except Template.DoesNotExist:
             raise TemplateDoesNotExist(origin.template_name)
 
