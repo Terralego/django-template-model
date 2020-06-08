@@ -29,5 +29,5 @@ class Loader(BaseLoader):
             with template.template_file.open('rb+') as my_template:
                 return my_template.read()
         except Template.DoesNotExist:
-            TemplateDoesNotExist(origin.template_name)
+            raise TemplateDoesNotExist(origin.template_name)
 
