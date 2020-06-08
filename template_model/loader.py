@@ -24,15 +24,10 @@ class Loader(BaseLoader):
         )
 
     def get_contents(self, origin):
-        return self._load_template_source(origin.template_name)
-
-    def _load__template(self, template_name):
-        template = Template.objects.get(template_file=template_name)
-        with template.template_file.open('rb+') as my_template:
-            return my_template.read()
-
-    def _load_template_source(self, template_name, template_dirs=None):
         try:
-            return self._load__template(template_name)
+            template = Template.objects.get(name=origin.template_name)
+            with template.template_file.open('rb+') as my_template:
+                return my_template.read()
         except Template.DoesNotExist:
-            TemplateDoesNotExist(template_name)
+            TemplateDoesNotExist(origin.template_name)
+
