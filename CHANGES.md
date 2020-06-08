@@ -1,6 +1,6 @@
 # Versions
 
-1.0.4.dev0      (XXXX-XX-XX)
+1.0.4           (2020-06-08)
 ----------------------------
 
 * Handle text or binary based templates (Compatibility with django-template-engines)
