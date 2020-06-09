@@ -34,4 +34,3 @@ class Loader(BaseLoader):
 
         except Template.DoesNotExist:
             raise TemplateDoesNotExist(origin.template_name)
-
