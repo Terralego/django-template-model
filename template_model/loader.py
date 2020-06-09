@@ -16,7 +16,7 @@ class Loader(BaseLoader):
     """
     is_usable = True
 
-    def get_template_sources(self, template_name, template_dirs=None):
+    def get_template_sources(self, template_name):
         yield Origin(
             name=template_name,
             template_name=template_name,
@@ -24,19 +24,13 @@ class Loader(BaseLoader):
         )
 
     def get_contents(self, origin):
-        return self._load_template_source(origin.template_name)
-
-    def _load__template(self, template_name):
-        template = Template.objects.get(template_file=template_name)
-        with template.template_file.open('rb+') as my_template:
-            try:
-                # for text based templates, decode it
-                return my_template.read().decode()
-            except UnicodeDecodeError:
-                return my_template.read()
-
-    def _load_template_source(self, template_name, template_dirs=None):
         try:
-            return self._load__template(template_name)
+            template = Template.objects.get(template_file=origin.template_name)
+            with template.template_file.open() as my_template:
+                try:
+                    return my_template.read().decode()
+                except UnicodeDecodeError:
+                    return my_template.read()
+
         except Template.DoesNotExist:
-            TemplateDoesNotExist(template_name)
+            raise TemplateDoesNotExist(origin.template_name)
