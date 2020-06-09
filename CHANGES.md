@@ -1,6 +1,6 @@
 # Versions
 
-1.0.5.dev0      (XXXX-XX-XX)
+1.0.5           (2020-06-09)
 ----------------------------
 
 * Simplify rendering
