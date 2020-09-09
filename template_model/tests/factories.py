@@ -3,7 +3,7 @@ import os
 from template_model.models import Template
 
 
-class TemplateHTMLFactory(factory.DjangoModelFactory):
+class TemplateHTMLFactory(factory.django.DjangoModelFactory):
     name = "HTML template"
     template_file = factory.django.FileField(from_path=os.path.join(os.path.dirname(__file__), "test.html"))
 
