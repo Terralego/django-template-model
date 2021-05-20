@@ -1,0 +1,27 @@
+name: Un fichier Yaml d'action Github
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: pip3 install flake8
+      - run: flake8 template_model
+  test:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        django-version: [ 2.2, 3.1 ]
+    steps:
+      - uses: actions/checkout@v2
+      - run: pip install
+      - run: pip install Django==${{ matrix.django-version }} -U #FIXME
+      - run: coverage run --source=template_model ./manage.py test
+      - run: codecov
+  deploy:
+    needs:  [lint, test]
+    runs-on: ubuntu-18.04
+    steps:
+      - run: echo "Deploy here"
