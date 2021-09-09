@@ -5,7 +5,7 @@ from .models import Template
 
 
 class TemplateForm(forms.ModelForm):
-    template_file = forms.FileField(required=False, allow_empty_file=True)
+    #template_file = forms.FileField(required=False, allow_empty_file=True)
     content = forms.CharField(widget=forms.Textarea, required=False)
 
     class Meta:
